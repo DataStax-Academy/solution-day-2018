@@ -18,9 +18,10 @@ LUNCH
 
 | Time  | Work  |
 |---|---|
-| 13:00-13:30  | [Lab2: HandsOn Cassandra](./04%20-%20LAB2/Dse_Cql.md)  |
+| 13:00-13:30  | [Lab2: HandsOn Cassandra](./04%20-%20LAB2/DseCassandra.md)  |
 | 13:30-14:30  | [Introducing DSE Search and Analytics](#) |
-| 14:30-15:30  | [Lab3&4: DSE Search and Analytics]   |
+| 14:30-15:30  | [Lab3: HandsOn Dse Search](./#) |
+| 14:30-15:30  | [Lab4: HandsOn Dse Analytics](./#) |
 | 15:30-15:45  | [Break](#) |
 | 15:45-16:15  | [Introducing DSE Graph](#)  |
 | 16:15-16:45  | [Lab5 : DSE Graph](#)  |

@@ -21,7 +21,7 @@ dse spark-sql --executor-memory 1G --total-executor-cores 2
 
 Find the list of merchants that Betty spends the most money with.
 
-```
+```sql
 SELECT merchant, sum(amount) AS total FROM transactions WHERE account_number = '1234123412341240' GROUP BY merchant ORDER BY total DESC;
 ```
 

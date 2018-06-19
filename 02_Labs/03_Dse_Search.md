@@ -94,7 +94,7 @@ To answer the following functional query we might need to index another column
 Now add the merchant column to the indexing
 
 ```
-ALTER SEARCH INDEX SCHEMA ON transactions ADD field[ @name='merchant', @type='TextField', @docValues='true'];
+ALTER SEARCH INDEX SCHEMA ON transactions ADD field[ @name='merchant', @type='StrField', @docValues='true'];
 RELOAD SEARCH INDEX ON transactions;
 REBUILD SEARCH INDEX ON transactions WITH OPTIONS { deleteAll:false };
 ```

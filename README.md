@@ -3,7 +3,7 @@ Welcome to DataStax Solution Day
 
 In this repository, you'll learn all about DataStax Enterprise. You will find materials used during presentation, labs and reference applications. Feel free to bookmark this page for future reference!
 
-<img src="./img/Frankfurt_2018.jpg" height="300" />
+<img src="./img/Munchen_2018.jpg" height="300" />
 
 ### Agenda
 

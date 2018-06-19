@@ -22,39 +22,57 @@ dse spark-sql --executor-memory 1G --total-executor-cores 2
 Find the list of merchants that Betty spends the most money with.
 
 ```sql
-SELECT merchant, sum(amount) AS total FROM transactions WHERE account_number = '1234123412341240' GROUP BY merchant ORDER BY total DESC;
+SELECT merchant, sum(amount) AS total 
+FROM transactions 
+WHERE account_number = '1234123412341240' 
+GROUP BY merchant 
+ORDER BY total DESC;
 ```
 
 Across the entire bank find the accounts that are doing the most transactions
 
-```
-SELECT account_number, count(account_number) AS total_trans FROM transactions GROUP BY account_number ORDER BY total_trans DESC;
+```sql
+SELECT account_number, count(account_number) AS total_trans 
+FROM transactions 
+GROUP BY account_number 
+ORDER BY total_trans DESC;
 ```
 
 Find the merchants doing the most transactions with the bank, and the total value of all transactions for each merchant.
-```
-SELECT merchant, sum(amount) AS total_amount, count(amount) AS total_trans FROM transactions GROUP BY merchant ORDER BY total_trans;
+
+```sql
+SELECT merchant, sum(amount) AS total_amount, count(amount) AS total_trans 
+FROM transactions 
+GROUP BY merchant 
+ORDER BY total_trans;
 ```
 
 Or you can order your results by total value of each merchant
-```
-SELECT merchant, sum(amount) AS total_amount, count(amount) AS total_trans FROM transactions GROUP BY merchant ORDER BY total_amount;
+```sql
+SELECT merchant, sum(amount) AS total_amount, count(amount) AS total_trans 
+FROM transactions 
+GROUP BY merchant 
+ORDER BY total_amount;
 ```
 
 Spark-SQL can also do JOINs across DSE tables. The table  merchant_category contains an index of all merchants and their merchandise categories. Query for all transactions with merchants that sell electronics.
-```
-SELECT * FROM merchant_category JOIN  transactions ON merchant_category.merchant = transactions.merchant WHERE category = "electronics";
+```sql
+SELECT * FROM merchant_category 
+JOIN  transactions ON merchant_category.merchant = transactions.merchant 
+WHERE category = "electronics";
 ```
 
 Put it all together. Find the merchants Betty bought electronics from and the total paid to each merchant.
-```
-SELECT merchant_category.merchant, sum(amount) AS total_amount FROM merchant_category JOIN  transactions ON merchant_category.merchant = transactions.merchant WHERE category = "electronics" AND account_number = '1234123412341240' GROUP BY merchant_category.merchant ORDER BY total_amount DESC;
+```sql
+SELECT merchant_category.merchant, sum(amount) AS total_amount 
+FROM merchant_category 
+JOIN  transactions ON merchant_category.merchant = transactions.merchant 
+WHERE category = "electronics" AND account_number = '1234123412341240' 
+GROUP BY merchant_category.merchant 
+ORDER BY total_amount DESC;
 ```
 
 (Press CTRL+C now to quit the DSE Spark-SQL prompt)
-
-
-
 
 #### **Spark Batch Hands On:**
 
@@ -73,6 +91,7 @@ A data model to support the fraud report dashboard (account_fraud)
 The  transactions_by_id table will be used to lookup existing transactions by their transaction_id. This table needs to be populated by the existing data in the  transactions table. This can be handled by Spark using some simple Scala.
 
 Start the spark scala prompt (run from the SSH command prompt on any cluster node)
+
 ```
 dse spark spark.ui.port=<Pick a random 4 digit number> --total-executor-cores 2 --executor-memory 1G
 ```
@@ -81,7 +100,7 @@ dse spark spark.ui.port=<Pick a random 4 digit number> --total-executor-cores 2 
 
 Create a varible that points to the table you want to source from. This is a “lazy evaluation”, meaning Spark won't execute the work that needs to be done until it is needed. Assinging the table to a varible allows you to iterate through the data later and perform operations such as aggregations, transformations, and enrichment.
 
-```
+```scala
 val transactions = sc.cassandraTable("<your keyspace>", "transactions")
 ```
 

@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+
+  # DSE6
+  dse6:
+    image: datastax/dse-server:latest
+    command: [ -s -g -k ]
+    ports:
+    - "9042:9042"
+    - "8983:8983"
+    - "8182:8182"
+    - "9077:9077"
+    - "7080:7080"
+    environment:
+      SERVICE_9042_NAME: cassandra
+      SERVICE_8983_NAME: dse-search
+      SERVICE_8182_NAME: gremlin
+      SERVICE_9077_NAME: alwaysOn
+      SERVICE_7080_NAME: spark-master
+      DS_LICENSE: accept
+    cap_add:
+    - IPC_LOCK
+    ulimits:
+      memlock: -1
+
+  # Studio 6
+  studio:
+    image: datastax/dse-studio:latest
+    ports:
+    - "9091:9091"
+    depends_on:
+    - dse6
+    environment:
+      SERVICE_9091_NAME: studio
+      DS_LICENSE: accept
+
+  # OpsCenter 6
+  studio:
+    image: datastax/dse-opscenter:latest
+    ports:
+    - "8888:8888"
+    depends_on:
+    - dse6
+    environment:
+      SERVICE_8888_NAME: opsCenter
+      DS_LICENSE: accept    

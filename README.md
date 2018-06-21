@@ -35,6 +35,7 @@ EOD
 * Get involved more tutorials here [DataStax Academy](https://academy.datastax.com/)
 * Learn more about [KillrVideo](https://github.com/killrvideo)
 * Dse in Saas Mode [DataStax Managed Cloud](./03_Materials/DataStax_Managed_Cloud.pdf)
+* More sample codes [HERE](https://github.com/DataStaxCodeSamples)
 
 <img src="./img/banner.png" height="300" />
 
